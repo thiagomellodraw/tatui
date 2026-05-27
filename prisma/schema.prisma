@@ -1,0 +1,214 @@
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model Tenant {
+  id           String        @id @default(cuid())
+  name         String        // Nome da pousada/cliente (ex: Tatuí)
+  subdomain    String        @unique // Subdomínio identificador (ex: tatui)
+  domain       String?       @unique // Domínio personalizado (ex: www.pousadatatui.com.br)
+  status       String        @default("ACTIVE") // ACTIVE, SUSPENDED, INACTIVE
+  monthlyFee   Float         @default(0.0) // Valor da mensalidade
+  dueDate      DateTime?     // Data de vencimento
+  createdAt    DateTime      @default(now())
+  updatedAt    DateTime      @updatedAt
+
+  // Relações
+  users        User[]
+  properties   Property[]
+  amenities    Amenity[]
+  leads        Lead[]
+  configs      Config[]
+  clickLogs    ClickLog[]
+  promoBanners PromoBanner[]
+  faqs         FAQ[]
+  invoices     Invoice[]
+}
+
+model User {
+  id           String   @id @default(cuid())
+  username     String   @unique
+  passwordHash String
+  role         String   @default("TENANT_ADMIN") // SUPER_ADMIN, TENANT_ADMIN
+  tenantId     String?  // Nulo se for Super Admin
+  tenant       Tenant?  @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+}
+
+model Property {
+  id                 String          @id @default(cuid())
+  title              String
+  titleEn            String?
+  titleEs            String?
+  slug               String          @unique
+  shortDescription   String
+  shortDescriptionEn String?
+  shortDescriptionEs String?
+  fullDescription    String
+  fullDescriptionEn  String?
+  fullDescriptionEs  String?
+  location           String
+  locationEn         String?
+  locationEs         String?
+  city               String
+  neighborhood       String
+  state              String
+  addressOptional    String?
+  latitude           Float?
+  longitude          Float?
+  propertyType       String          // Casa, Apartamento, Chalé, Villa, etc.
+  guests             Int
+  bedrooms           Int
+  beds               Int
+  bathrooms          Int
+  area               Int?            // m²
+  priceFrom          Float?          // Preço "A partir de"
+  externalBookingUrl String          // Airbnb, Booking, etc.
+  whatsappUrl        String?         // Link direto de WhatsApp para o imóvel
+  featured           Boolean         @default(false)
+  active             Boolean         @default(true)
+  coverImage         String          // URL da foto de capa
+  clicksCount        Int             @default(0)
+  
+  tenantId           String
+  tenant             Tenant          @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+
+  createdAt          DateTime        @default(now())
+  updatedAt          DateTime        @updatedAt
+  
+  images             PropertyImage[]
+  amenities          Amenity[]
+}
+
+model PropertyImage {
+  id         String   @id @default(cuid())
+  url        String
+  order      Int      @default(0)
+  propertyId String
+  property   Property @relation(fields: [propertyId], references: [id], onDelete: Cascade)
+}
+
+model Amenity {
+  id         String     @id @default(cuid())
+  name       String
+  nameEn     String?
+  nameEs     String?
+  icon       String     // Nome do ícone da Lucide
+  active     Boolean    @default(true)
+  
+  tenantId   String
+  tenant     Tenant     @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+  
+  properties Property[]
+
+  @@unique([name, tenantId])
+}
+
+model Lead {
+  id           String   @id @default(cuid())
+  name         String
+  email        String
+  phone        String
+  message      String
+  propertyId   String?  // Id do imóvel de interesse (opcional)
+  propertyName String?  // Nome do imóvel de interesse para histórico
+  status       String   @default("NOVO") // NOVO, EM_ATENDIMENTO, RESPONDIDO, ARQUIVADO
+  
+  tenantId     String
+  tenant       Tenant   @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+  
+  createdAt    DateTime @default(now())
+}
+
+model Config {
+  id             String   @id @default(cuid())
+  brandName      String   @default("Tatuí")
+  logoUrl        String?
+  heroTitle      String   @default("Encontre o refúgio ideal para sua próxima temporada.")
+  heroTitleEn    String?
+  heroTitleEs    String?
+  heroSubtitle   String   @default("Imóveis exclusivos selecionados para quem busca sofisticação, conforto e memórias inesquecíveis.")
+  heroSubtitleEn String?
+  heroSubtitleEs String?
+  whatsappNumber String   @default("5511999999999")
+  contactEmail   String   @default("contato@tatui.com.br")
+  instagramUrl   String?
+  facebookUrl    String?
+  tiktokUrl      String?
+  footerText     String   @default("© 2026 Tatuí. Todos os direitos reservados. As reservas são concluídas em plataformas parceiras.")
+  footerTextEn   String?
+  footerTextEs   String?
+  
+  tenantId       String   @unique
+  tenant         Tenant   @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+
+  updatedAt      DateTime @updatedAt
+}
+
+model ClickLog {
+  id           String   @id @default(cuid())
+  propertyId   String
+  propertyName String
+  
+  tenantId     String
+  tenant       Tenant   @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+
+  clickedAt    DateTime @default(now())
+}
+
+model PromoBanner {
+  id          String   @id @default(cuid())
+  title       String
+  titleEn     String?
+  titleEs     String?
+  subtitle    String?
+  subtitleEn  String?
+  subtitleEs  String?
+  imageUrl    String
+  linkUrl     String?
+  active      Boolean  @default(true)
+  order       Int      @default(0)
+  
+  tenantId    String
+  tenant      Tenant   @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model FAQ {
+  id         String   @id @default(cuid())
+  question   String
+  questionEn String?
+  questionEs String?
+  answer     String
+  answerEn   String?
+  answerEs   String?
+  active     Boolean  @default(true)
+  order      Int      @default(0)
+  
+  tenantId   String
+  tenant     Tenant   @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+}
+
+model Invoice {
+  id             String   @id @default(cuid())
+  tenantId       String
+  tenant         Tenant   @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+  amount         Float
+  status         String   // PAID, PENDING, OVERDUE, CANCELLED
+  dueDate        DateTime
+  paidAt         DateTime?
+  referenceMonth String   // ex: "05/2026"
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+}

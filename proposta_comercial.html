@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Proposta Comercial de Parceria — Tatuí</title>
+  
+  <!-- Fontes Premium -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+  
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+            display: ['Playfair Display', 'serif'],
+          },
+          colors: {
+            luxury: {
+              charcoal: '#1E2022',
+              bronze: '#8D7B68',
+              gold: '#C8B6A6',
+              cream: '#F1DEC9',
+            }
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    body {
+      font-family: 'Inter', sans-serif;
+      color: #334155;
+    }
+    @media print {
+      .no-print {
+        display: none !important;
+      }
+      body {
+        background-color: white !important;
+      }
+      .print-page-break {
+        page-break-before: always;
+      }
+    }
+  </style>
+</head>
+<body class="bg-slate-50 min-h-screen pb-12">
+
+  <!-- Ações Superiores (Escondidas na Impressão) -->
+  <div class="no-print sticky top-0 z-50 bg-white/90 backdrop-blur-md border-b border-slate-200 py-4 px-6 mb-8 shadow-sm">
+    <div class="max-w-4xl mx-auto flex items-center justify-between">
+      <div class="flex items-center gap-2">
+        <span class="font-display font-extrabold text-xl text-slate-900">Tatuí</span>
+        <span class="text-xs bg-luxury-cream/50 px-2.5 py-1 rounded-full text-luxury-bronze font-bold border border-luxury-gold/30">Proposta Comercial</span>
+      </div>
+      <button 
+        onclick="window.print()" 
+        class="bg-luxury-charcoal text-white hover:bg-luxury-bronze text-sm font-bold px-6 py-2.5 rounded-xl transition-all shadow-md flex items-center gap-2 cursor-pointer transform active:scale-95"
+      >
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-4.5 w-4.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z" />
+        </svg>
+        Salvar Proposta Comercial (PDF)
+      </button>
+    </div>
+  </div>
+
+  <!-- Capa da Proposta -->
+  <main class="max-w-4xl mx-auto bg-white rounded-3xl border border-slate-200 shadow-sm overflow-hidden print-shadow-none relative">
+    
+    <!-- Hero Banner -->
+    <div class="bg-luxury-charcoal text-white py-12 px-6 sm:p-16 md:p-20 relative overflow-hidden">
+      <div class="absolute top-0 right-0 w-[50%] aspect-square rounded-full bg-luxury-gold/10 blur-[100px] pointer-events-none" />
+      <div class="relative z-10 space-y-4 max-w-2xl">
+        <span class="text-xs font-bold uppercase tracking-widest text-luxury-gold">Proposta de Negócios e Parceria</span>
+        <h1 class="font-display font-extrabold text-3xl sm:text-4xl md:text-5xl tracking-tight text-white leading-tight">Modelos de Licenciamento da Plataforma Tatuí</h1>
+        <p class="text-sm sm:text-base text-gray-300 font-light leading-relaxed">
+          Duas opções estratégicas para monetizar e implantar a melhor solução de reservas por temporada para hotéis e pousadas.
+        </p>
+      </div>
+    </div>
+
+    <!-- Conteúdo da Proposta -->
+    <div class="p-6 sm:p-12 md:p-16 space-y-12">
+      
+      <!-- Introdução -->
+      <div class="space-y-4">
+        <h2 class="font-display font-bold text-2xl text-slate-900 border-b border-slate-100 pb-3">Visão de Oportunidade</h2>
+        <p class="text-slate-600 leading-relaxed text-sm">
+          Esta proposta apresenta dois modelos comerciais distintos. O objetivo é permitir que você escolha o formato que melhor se alinha à sua estratégia de atendimento a hotéis e pousadas, seja criando um novo produto digital para a sua agência (SaaS/White-label) ou terceirizando o desenvolvimento e a manutenção técnica sob demanda.
+        </p>
+      </div>
+
+      <!-- Opção 1 -->
+      <div class="p-6 sm:p-8 rounded-3xl bg-slate-50 border border-slate-200/60 space-y-6 relative overflow-hidden">
+        <div class="absolute top-0 right-0 bg-luxury-bronze text-white text-[10px] font-bold uppercase tracking-widest px-4 py-1.5 rounded-bl-2xl">
+          Opção 1
+        </div>
+        
+        <div class="space-y-2">
+          <span class="text-xs font-bold text-luxury-bronze uppercase tracking-widest">Modelo de Alto Volume</span>
+          <h3 class="font-display font-extrabold text-2xl text-slate-900">Licenciamento Completo & White-Label</h3>
+          <p class="text-sm text-slate-500">
+            Adquira o direito de propriedade e replicação da plataforma para revender sob a sua própria marca de forma ilimitada.
+          </p>
+        </div>
+
+        <!-- O que inclui -->
+        <div class="space-y-3">
+          <h4 class="text-xs font-bold uppercase tracking-wider text-slate-700">O que está incluído:</h4>
+          <ul class="text-xs text-slate-600 space-y-2 list-disc pl-5">
+            <li>**Código-Fonte Completo**: Entrega de todo o projeto desenvolvido em tecnologia de ponta (Next.js).</li>
+            <li>**Direito de Revenda Ilimitado**: Liberdade para revender a plataforma sob sua própria marca (White-Label) para quantas pousadas e hotéis desejar.</li>
+            <li>**Independência de Lucro**: Todo o valor das mensalidades e setups cobrados dos seus clientes fica 100% com a sua empresa.</li>
+          </ul>
+        </div>
+
+        <!-- Investimento Opção 1 -->
+        <div class="pt-4 border-t border-slate-200 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+          <div>
+            <span class="text-xs font-medium text-slate-400 block">Investimento de Entrada</span>
+            <span class="text-xl sm:text-2xl font-extrabold text-slate-900">R$ 15.000 a R$ 25.000</span>
+            <span class="text-[10px] text-slate-450 block mt-0.5">(Taxa única pelo direito de uso/replicação de código)</span>
+          </div>
+          <div class="text-left sm:text-right border-l sm:border-l-0 sm:border-r border-slate-200 pl-4 sm:pl-0 sm:pr-4">
+            <span class="text-xs font-medium text-slate-400 block">Setup Técnico (Opcional)</span>
+            <span class="text-base font-bold text-slate-800">R$ 500 a R$ 1.000 / cliente novo</span>
+            <span class="text-[10px] text-slate-450 block mt-0.5">(Cobrado de você apenas quando precisar que façamos a configuração no ar)</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="print-page-break"></div>
+
+      <!-- Opção 2 -->
+      <div class="p-6 sm:p-8 rounded-3xl bg-slate-50 border border-slate-200/60 space-y-6 relative overflow-hidden">
+        <div class="absolute top-0 right-0 bg-luxury-charcoal text-white text-[10px] font-bold uppercase tracking-widest px-4 py-1.5 rounded-bl-2xl">
+          Opção 2
+        </div>
+        
+        <div class="space-y-2">
+          <span class="text-xs font-bold text-slate-500 uppercase tracking-widest">Modelo Sob Demanda</span>
+          <h3 class="font-display font-extrabold text-2xl text-slate-900">Desenvolvimento Único & Suporte Dedicado</h3>
+          <p class="text-sm text-slate-500">
+            Adquira o desenvolvimento da plataforma para um cliente específico de sua carteira, mantendo-nos como suporte de gestão mensal.
+          </p>
+        </div>
+
+        <!-- O que inclui -->
+        <div class="space-y-3">
+          <h4 class="text-xs font-bold uppercase tracking-wider text-slate-700">O que está incluído:</h4>
+          <ul class="text-xs text-slate-600 space-y-2 list-disc pl-5">
+            <li>**Entrega Personalizada**: O site é adaptado e colocado no ar especificamente para a pousada/hotel escolhida.</li>
+            <li>**Gestão de Infraestrutura Inclusa**: Hospedagem, banco de dados e backups monitorados de forma contínua.</li>
+            <li>**Retentor Mensal de Ajustes**: Franquia mensal de horas de suporte para pequenas modificações estéticas, cadastro de novos imóveis ou atualizações de banners.</li>
+          </ul>
+        </div>
+
+        <!-- Investimento Opção 2 -->
+        <div class="pt-4 border-t border-slate-200 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+          <div>
+            <span class="text-xs font-medium text-slate-400 block">Desenvolvimento Inicial (Setup)</span>
+            <span class="text-xl sm:text-2xl font-extrabold text-slate-900">R$ 4.000 a R$ 6.000</span>
+            <span class="text-[10px] text-slate-450 block mt-0.5">(Taxa única para colocar o primeiro cliente no ar)</span>
+          </div>
+          <div class="text-left sm:text-right border-l sm:border-l-0 sm:border-r border-slate-200 pl-4 sm:pl-0 sm:pr-4">
+            <span class="text-xs font-medium text-slate-400 block">Suporte & Gestão Técnico</span>
+            <span class="text-base font-bold text-slate-800">R$ 400 a R$ 700 / mês</span>
+            <span class="text-[10px] text-slate-450 block mt-0.5">(Garante hospedagem ativa, backups e até 4 horas/mês de atualizações)</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Rodapé -->
+    <footer class="bg-slate-50 border-t border-slate-100 p-8 text-center text-xs text-slate-400">
+      <p>© 2026 Tatuí. Todos os direitos reservados. Confidencial.</p>
+    </footer>
+
+  </main>
+
+</body>
+</html>

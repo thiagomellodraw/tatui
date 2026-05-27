@@ -1,0 +1,726 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Documentação da Plataforma — Tatuí</title>
+  
+  <!-- Fontes Premium -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+  
+  <!-- Markdown Parser -->
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+  
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+            display: ['Playfair Display', 'serif'],
+          },
+          colors: {
+            luxury: {
+              charcoal: '#1E2022',
+              bronze: '#8D7B68',
+              gold: '#C8B6A6',
+              cream: '#F1DEC9',
+            }
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    body {
+      font-family: 'Inter', sans-serif;
+      color: #334155;
+    }
+    
+    /* Custom Markdown Rendering Styles */
+    #markdown-content h1 {
+      font-family: 'Playfair Display', serif;
+      font-weight: 800;
+      font-size: 2.25rem;
+      line-height: 2.5rem;
+      color: #0f172a;
+      margin-top: 2rem;
+      margin-bottom: 1rem;
+      border-bottom: 2px solid #f1f5f9;
+      padding-bottom: 0.5rem;
+      page-break-after: avoid;
+    }
+    
+    #markdown-content h2 {
+      font-family: 'Playfair Display', serif;
+      font-weight: 700;
+      font-size: 1.75rem;
+      line-height: 2rem;
+      color: #1e293b;
+      margin-top: 2.5rem;
+      margin-bottom: 1rem;
+      border-bottom: 1px solid #f1f5f9;
+      padding-bottom: 0.25rem;
+      page-break-after: avoid;
+    }
+    
+    #markdown-content h3 {
+      font-weight: 700;
+      font-size: 1.25rem;
+      line-height: 1.75rem;
+      color: #334155;
+      margin-top: 1.75rem;
+      margin-bottom: 0.5rem;
+      page-break-after: avoid;
+    }
+
+    #markdown-content h4 {
+      font-weight: 700;
+      font-size: 1.05rem;
+      line-height: 1.5rem;
+      color: #475569;
+      margin-top: 1.25rem;
+      margin-bottom: 0.25rem;
+      page-break-after: avoid;
+    }
+    
+    #markdown-content p {
+      margin-bottom: 1rem;
+      line-height: 1.625;
+      font-size: 0.95rem;
+    }
+    
+    #markdown-content ul, #markdown-content ol {
+      margin-bottom: 1.25rem;
+      padding-left: 1.5rem;
+      font-size: 0.95rem;
+    }
+    
+    #markdown-content ul {
+      list-style-type: disc;
+    }
+    
+    #markdown-content ol {
+      list-style-type: decimal;
+    }
+    
+    #markdown-content li {
+      margin-bottom: 0.375rem;
+    }
+    
+    #markdown-content table {
+      width: 100%;
+      margin-top: 1rem;
+      margin-bottom: 1.5rem;
+      border-collapse: collapse;
+      font-size: 0.875rem;
+      text-align: left;
+    }
+    
+    #markdown-content th {
+      background-color: #f8fafc;
+      color: #0f172a;
+      font-weight: 700;
+      padding: 0.75rem 1rem;
+      border: 1px solid #e2e8f0;
+    }
+    
+    #markdown-content td {
+      padding: 0.75rem 1rem;
+      border: 1px solid #e2e8f0;
+      color: #475569;
+    }
+    
+    #markdown-content tr:nth-child(even) td {
+      background-color: #f8fafc;
+    }
+    
+    #markdown-content code {
+      font-family: monospace;
+      background-color: #f1f5f9;
+      color: #0f172a;
+      padding: 0.125rem 0.375rem;
+      border-radius: 0.25rem;
+      font-size: 0.85em;
+    }
+    
+    #markdown-content pre {
+      background-color: #0f172a;
+      color: #f8fafc;
+      padding: 1rem;
+      border-radius: 0.75rem;
+      overflow-x: auto;
+      margin-bottom: 1.25rem;
+      font-size: 0.875rem;
+    }
+    
+    #markdown-content pre code {
+      background-color: transparent;
+      color: inherit;
+      padding: 0;
+      border-radius: 0;
+      font-size: inherit;
+    }
+
+    #markdown-content blockquote {
+      border-left: 4px solid #c8b6a6;
+      padding-left: 1rem;
+      font-style: italic;
+      color: #64748b;
+      margin-bottom: 1.25rem;
+    }
+
+    /* Print styling rules */
+    @media print {
+      body {
+        background-color: white !important;
+        color: black !important;
+        font-size: 10pt;
+      }
+      .no-print {
+        display: none !important;
+      }
+      .print-shadow-none {
+        box-shadow: none !important;
+        border: none !important;
+      }
+      .page-break {
+        page-break-before: always;
+      }
+      #markdown-content h1, #markdown-content h2, #markdown-content h3 {
+        page-break-after: avoid !important;
+      }
+      #markdown-content table {
+        page-break-inside: avoid;
+      }
+    }
+  </style>
+</head>
+<body class="bg-slate-50 min-h-screen pb-12">
+
+  <!-- Header flutuante de ações (Não visível na impressão) -->
+  <div class="no-print sticky top-0 z-50 bg-white/80 backdrop-blur-md border-b border-slate-200 py-4 px-6 mb-8 shadow-sm">
+    <div class="max-w-4xl mx-auto flex items-center justify-between">
+      <div class="flex items-center gap-2">
+        <span class="font-display font-extrabold text-xl text-slate-900">Tatuí</span>
+        <span class="text-xs bg-slate-100 px-2.5 py-1 rounded-full text-slate-600 font-semibold border border-slate-200">Documentação</span>
+      </div>
+      <button 
+        onclick="window.print()" 
+        class="bg-luxury-charcoal text-white hover:bg-luxury-bronze text-sm font-bold px-5 py-2.5 rounded-xl transition-all shadow-md flex items-center gap-2 cursor-pointer transform active:scale-95"
+      >
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-4.5 w-4.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z" />
+        </svg>
+        Salvar como PDF
+      </button>
+    </div>
+  </div>
+
+  <!-- Container principal do documento -->
+  <main class="max-w-4xl mx-auto bg-white p-5 sm:p-8 md:p-16 rounded-3xl border border-slate-200 shadow-sm print-shadow-none relative">
+    
+    <!-- Capa / Cabeçalho Premium -->
+    <header class="border-b-4 border-luxury-bronze pb-8 mb-8">
+      <div class="flex justify-between items-start">
+        <div>
+          <h1 class="font-display font-extrabold text-4xl md:text-5xl text-slate-900 tracking-tight">Tatuí</h1>
+          <p class="text-luxury-bronze uppercase tracking-widest text-xs font-bold mt-2">Plataforma Exclusiva de Aluguel por Temporada</p>
+        </div>
+        <div class="text-right text-xs text-slate-400">
+          <p class="font-semibold">Versão 1.0.0</p>
+          <p class="mt-1">Maio de 2026</p>
+        </div>
+      </div>
+    </header>
+
+    <!-- Área de renderização dinâmica do Markdown -->
+    <article id="markdown-content" class="prose prose-slate max-w-none">
+      <!-- O conteúdo será injetado pelo Script -->
+    </article>
+  </main>
+
+  <!-- Injeção do Conteúdo do Markdown Sem CORS -->
+  <script id="markdown-text" type="text/markdown"># 📋 Documentação da Plataforma — Aluguel por Temporada
+
+> Plataforma web premium para divulgação e gestão de imóveis de temporada, com painel administrativo completo, suporte a múltiplos idiomas e integração com plataformas externas de reserva.
+
+---
+
+## 🌐 Visão Geral
+
+| Item | Detalhe |
+|------|---------|
+| **Framework** | Next.js 16 (App Router, Turbopack) |
+| **Linguagem** | TypeScript |
+| **Banco de Dados** | SQLite via Prisma ORM |
+| **Estilo** | Tailwind CSS + Glassmorphism customizado |
+| **Animações** | Framer Motion |
+| **Ícones** | Lucide React |
+| **Idiomas** | Português 🇧🇷 · Inglês 🇺🇸 · Espanhol 🇪🇸 |
+
+---
+
+## 🏠 Site Público
+
+### Páginas Disponíveis
+
+| Rota | Página | Descrição |
+|------|--------|-----------|
+| `/` | **Home** | Página principal com hero, busca, imóveis e FAQ |
+| `/imoveis` | **Catálogo** | Listagem completa com filtros avançados |
+| `/imoveis/[slug]` | **Detalhe do Imóvel** | Galeria, descrição, comodidades e CTA de reserva |
+| `/sobre` | **Sobre Nós** | Página institucional da empresa |
+| `/contato` | **Contato** | Formulário de contato e link direto para WhatsApp |
+
+---
+
+### 🔎 Home Page (`/`)
+
+#### Hero Principal
+- Imagem de fundo em tela cheia com overlay gradiente
+- Título e subtítulo configuráveis pelo painel admin (com tradução para EN/ES)
+- Badge animado de curadoria exclusiva
+- **Campo de busca rápida** por cidade, hóspedes e tipo de imóvel
+
+#### Destinos Populares
+- Links rápidos para as cidades com imóveis cadastrados
+- Gerado automaticamente a partir do banco de dados
+
+#### Imóveis em Destaque
+- Exibe até **6 imóveis**: primeiro os marcados como "Destaque", depois os mais recentes
+- Dois blocos de grid com 3 cards cada
+- Botão "Explorar Todos os Imóveis" com link para o catálogo
+
+#### Banners Promocionais
+- Seção dinâmica com banners cadastrados no admin
+- Cada banner pode ter imagem, título, subtítulo e link externo
+- Totalmente traduzível (PT/EN/ES)
+- Hover com efeito zoom e badge "Destaque/Offer/Oferta"
+
+#### Por Que Escolher
+- 3 blocos de diferenciais com ícone, título e descrição
+- Conteúdo traduzível
+
+#### Estilos de Hospedagem
+- 4 cards visuais com foto de fundo: Pé na Areia, Montanha, Luxo, Home Office
+- Hover com zoom suave
+
+#### Depoimentos
+- 2 avaliações de hóspedes com foto, nome, imóvel e comentário
+
+#### Perguntas Frequentes (FAQ)
+- Accordion animado (Framer Motion)
+- FAQs cadastradas e gerenciadas no painel admin
+- Totalmente traduzível (PT/EN/ES)
+
+#### CTA Final
+- Card com chamada para ação com dois botões: Ver Imóveis e Fale Conosco
+
+---
+
+### 🏘️ Catálogo de Imóveis (`/imoveis`)
+
+#### Filtros de Busca
+- **Cidade** — dropdown com cidades disponíveis no banco
+- **Mínimo de Hóspedes** — seleção de capacidade
+- **Tipo de Imóvel** — Casa, Apartamento, Chalé, Villa, Cobertura, etc.
+- **Preço Máximo** — slider de valor
+- **Comodidades** — checkboxes múltiplos (Wi-Fi, Piscina, etc.)
+- Botão "Limpar Filtros"
+
+#### Grade de Resultados
+- Grid responsivo de cards com foto de capa, cidade, tipo, preço, hóspedes, quartos e banheiros
+- Contador de imóveis encontrados
+- **Ordenação** por: Destaques, Menor Preço, Maior Preço, Mais Recentes
+- **Favoritos** — salvos no localStorage (sem login)
+
+#### Card do Imóvel
+- Foto de capa com hover zoom
+- Badge de tipo e "Destaque"
+- Informações resumidas (hóspedes, quartos, banheiros, área)
+- Preço "a partir de"
+- Botão de favoritar (coração)
+
+---
+
+### 🏡 Detalhe do Imóvel (`/imoveis/[slug]`)
+
+#### Galeria de Fotos
+- Grid estilo editorial com foto principal grande e miniaturas
+- Modal de galeria em tela cheia com navegação por setas e teclado
+- Suporte a múltiplas imagens com ordem configurável
+
+#### Informações do Imóvel
+- Título, localização, tipo, área (m²)
+- Capacidade: hóspedes, quartos, camas, banheiros
+- Descrição completa formatada
+- Lista de comodidades com ícones Lucide
+
+#### Botões de Ação (CTA)
+- **"Reservar Agora"** — redireciona para o link externo cadastrado (Airbnb, Booking, etc.)
+- **"Chamar no WhatsApp"** — abre WhatsApp com mensagem pré-formatada
+- Clique nos botões de reserva é **registrado** automaticamente no banco (ClickLog)
+
+#### Imóveis Recomendados
+- Grid de até 3 imóveis da mesma cidade ou tipo
+- Gerado automaticamente
+
+#### Compartilhamento Social
+- Botões para compartilhar via WhatsApp, copiar link
+
+---
+
+### 📞 Contato (`/contato`)
+
+- Formulário com: Nome, E-mail, Telefone, Imóvel de Interesse (opcional), Mensagem
+- Ao enviar, cria um **Lead** no banco de dados com status "NOVO"
+- Link direto para WhatsApp
+- Exibe o e-mail e número de contato configurados no admin
+
+---
+
+### ℹ️ Sobre Nós (`/sobre`)
+
+- Apresentação institucional da empresa
+- Diferenciais, missão e valores
+- Chamada para contato
+
+---
+
+### 🌍 Multi-idioma
+
+- Seletor de idioma na Navbar (PT · EN · ES)
+- Idioma salvo em **cookie** para persistência entre páginas
+- Todos os textos estáticos traduzidos via dicionário (`i18n.ts`)
+- Conteúdos dinâmicos (imóveis, banners, FAQs, configs) têm campos traduzíveis cadastrados no admin
+- Fallback automático para Português caso a tradução não esteja preenchida
+
+---
+
+### 🎨 Design e UX
+
+- **Navbar inteligente**: transparente com logo branca no hero da home; glassmorphism com logo colorida nas demais páginas e após scroll
+- **Footer** com: links, contato, redes sociais, formas de pagamento (Pix, Visa, Mastercard, Amex, Apple Pay, Google Pay)
+- Responsivo para mobile, tablet e desktop
+- Animações suaves com Framer Motion (fade-in, slide-up, accordion)
+- Glassmorphism, gradientes e micro-interações nos hovers
+
+---
+
+## 🔒 Painel Administrativo (`/admin`)
+
+### Acesso
+- Rota protegida: `/admin/login`
+- Autenticação via **sessão criptografada em cookie** (iron-session)
+- Logout automático por expiração de sessão
+- Sem cadastro público — apenas o administrador cadastrado no seed tem acesso
+
+---
+
+### 📊 Dashboard (`/admin`)
+
+#### Métricas Gerais
+| Métrica | Descrição |
+|---------|-----------|
+| Total de Imóveis | Quantidade de imóveis cadastrados |
+| Imóveis Ativos | Imóveis visíveis no site |
+| Total de Leads | Formulários de contato recebidos |
+| Leads Novos | Leads com status "NOVO" |
+| Cliques de Reserva | Total de cliques nos botões de reserva |
+| Cliques Hoje | Cliques registrados no dia atual |
+
+#### Gráfico de Cliques por Imóvel
+- Lista os imóveis com mais cliques em botões de reserva
+- Ranking com barra de progresso visual
+
+#### Leads Recentes
+- Tabela com os últimos 5 leads recebidos
+- Nome, e-mail, imóvel de interesse, status e data
+
+---
+
+### 🏠 Gestão de Imóveis (`/admin/imoveis`)
+
+#### Listagem
+- Tabela com foto, nome, cidade, tipo, status (ativo/inativo), destaque e ações
+- Busca por nome
+- Filtro por status (ativo/inativo)
+- Botão de ativar/desativar rápido
+- Reordenação por drag-and-drop
+
+#### Cadastro / Edição (`/admin/imoveis/novo` e `/admin/imoveis/[id]`)
+
+**Abas de conteúdo por idioma:** PT · EN · ES
+
+| Campo | Tipo | Descrição |
+|-------|------|-----------|
+| Título | Texto | Nome do imóvel (PT/EN/ES) |
+| Slug | Texto | URL amigável (gerado automaticamente) |
+| Descrição Curta | Texto | Resumo para cards (PT/EN/ES) |
+| Descrição Completa | Textarea | Texto completo da página de detalhe (PT/EN/ES) |
+| Localização | Texto | Endereço exibido (PT/EN/ES) |
+| Cidade | Texto | Usada nos filtros |
+| Bairro | Texto | — |
+| Estado | Texto | Sigla do estado |
+| Endereço Opcional | Texto | Complemento interno |
+| Latitude / Longitude | Número | Para integração com mapas |
+| Tipo de Imóvel | Select | Casa, Apartamento, Chalé, Villa, Cobertura, etc. |
+| Hóspedes | Número | Capacidade total |
+| Quartos | Número | — |
+| Camas | Número | — |
+| Banheiros | Número | — |
+| Área (m²) | Número | — |
+| Preço "A partir de" | Número | Exibido nos cards |
+| Link de Reserva Externo | URL | Airbnb, Booking, site próprio, etc. |
+| Link WhatsApp | URL | Link direto do WhatsApp para esse imóvel |
+| Imagem de Capa | URL | Foto principal |
+| Galeria de Fotos | URLs | Múltiplas fotos com ordenação |
+| Comodidades | Checkboxes | Seleção múltipla das comodidades cadastradas |
+| Ativo | Toggle | Visível no site |
+| Destaque | Toggle | Aparece na home e no topo do catálogo |
+
+---
+
+### 🏷️ Gestão de Comodidades (`/admin/comodidades`)
+
+- Lista de comodidades disponíveis para associar aos imóveis
+- Cadastro com: **Nome** (PT/EN/ES), **Ícone** (nome do ícone Lucide), **Ativo**
+- Ícones pré-visualizados na listagem
+- Ativar/desativar sem excluir
+
+---
+
+### 👥 Gestão de Leads (`/admin/leads`)
+
+| Campo | Descrição |
+|-------|-----------|
+| Nome | Nome do visitante |
+| E-mail | E-mail de contato |
+| Telefone | Número de telefone |
+| Imóvel de Interesse | Imóvel vinculado (se informado) |
+| Mensagem | Texto da mensagem |
+| Status | NOVO · EM_ATENDIMENTO · RESPONDIDO · ARQUIVADO |
+| Data | Timestamp de envio |
+
+- Filtro por status
+- Alteração de status diretamente na listagem
+- Visualização completa da mensagem
+
+---
+
+### 🖼️ Banners Promocionais (`/admin/banners`)
+
+#### Listagem
+- Tabela com foto em miniatura, título, status e ordenação
+- Ativar/desativar sem excluir
+- Botão de editar e excluir
+
+#### Cadastro / Edição (`/admin/banners/novo` e `/admin/banners/[id]`)
+
+| Campo | Tipo | Descrição |
+|-------|------|-----------|
+| Título | Texto | Título do banner (PT/EN/ES) |
+| Subtítulo | Texto | Chamada secundária (PT/EN/ES) |
+| URL da Imagem | URL | Foto do banner |
+| Link de Destino | URL | Onde o banner redireciona ao clicar |
+| Ordem | Número | Posição de exibição |
+| Ativo | Toggle | Visível no site |
+
+> Os banners ativos aparecem na **Home Page** em uma seção dedicada com cards visuais e hover animado.
+
+---
+
+### ❓ Perguntas Frequentes (`/admin/faqs`)
+
+#### Listagem
+- Tabela com pergunta, status e ordem
+- Ativar/desativar sem excluir
+
+#### Cadastro / Edição (`/admin/faqs/novo` e `/admin/faqs/[id]`)
+
+| Campo | Tipo | Descrição |
+|-------|------|-----------|
+| Pergunta | Texto | Título da FAQ (PT/EN/ES) |
+| Resposta | Textarea | Texto da resposta (PT/EN/ES) |
+| Ordem | Número | Posição no accordion |
+| Ativo | Toggle | Visível no site |
+
+> As FAQs ativas aparecem na **Home Page** em um accordion animado com suporte a múltiplos idiomas.
+
+---
+
+### ⚙️ Configurações Gerais (`/admin/configuracoes`)
+
+**Abas de conteúdo por idioma:** PT · EN · ES
+
+| Campo | Descrição |
+|-------|-----------|
+| Nome da Marca | Nome exibido no site |
+| URL da Logo | Imagem da logomarca |
+| Título do Hero | Título principal da home (PT/EN/ES) |
+| Subtítulo do Hero | Subtítulo da home (PT/EN/ES) |
+| Número do WhatsApp | Usado em todos os botões de contato |
+| E-mail de Contato | Exibido na página de contato |
+| Instagram | Link para o perfil |
+| Facebook | Link para o perfil |
+| TikTok | Link para o perfil |
+| Texto do Rodapé | Copyright e aviso de reservas (PT/EN/ES) |
+
+---
+
+## 🗄️ Banco de Dados — Modelos
+
+```
+User           → Administrador do painel
+Property       → Imóvel de temporada
+PropertyImage  → Fotos da galeria do imóvel
+Amenity        → Comodidades disponíveis
+Lead           → Contatos recebidos pelo formulário
+Config         → Configurações globais do site
+ClickLog       → Registro de cliques nos botões de reserva
+PromoBanner    → Banners promocionais da home
+FAQ            → Perguntas frequentes
+```
+
+---
+
+## 🔧 Arquitetura Técnica
+
+### Server Actions (`/src/app/actions/`)
+
+| Arquivo | Funções |
+|---------|---------|
+| `auth.ts` | `loginAdmin`, `logoutAdmin`, `getSession` |
+| `properties.ts` | `getProperties`, `getPropertyBySlug`, `createProperty`, `updateProperty`, `deleteProperty`, `togglePropertyActive`, `togglePropertyFeatured`, `registerClick` |
+| `amenities.ts` | `getAmenities`, `createAmenity`, `updateAmenity`, `deleteAmenity`, `toggleAmenityActive` |
+| `leads.ts` | `createLead`, `getLeads`, `updateLeadStatus` |
+| `config.ts` | `getConfig`, `updateConfig` |
+| `banners.ts` | `getBanners`, `getAdminBanners`, `createBanner`, `updateBanner`, `deleteBanner` |
+| `faqs.ts` | `getFaqs`, `getAdminFaqs`, `createFaq`, `updateFaq`, `deleteFaq` |
+
+### Autenticação
+- Sessão criptografada via cookie HTTP-only
+- Middleware de proteção em todas as rotas `/admin/*` (exceto `/admin/login`)
+- Sem dependência de serviços externos (tudo local)
+
+### Performance
+- Server Components para todas as páginas com dados (sem chamadas client-side desnecessárias)
+- `force-dynamic` nas páginas admin para sempre buscar dados frescos
+- Imagens otimizadas via `next/image` com `remotePatterns` configurados
+- Fonte carregada via Google Fonts (Inter + Playfair Display)
+
+---
+
+## 📁 Estrutura de Diretórios
+
+```
+src/
+├── app/
+│   ├── (public)/          # Páginas do site público
+│   │   ├── page.tsx       # Home
+│   │   ├── imoveis/       # Catálogo e detalhe
+│   │   ├── sobre/         # Sobre nós
+│   │   └── contato/       # Formulário de contato
+│   ├── admin/             # Painel administrativo
+│   │   ├── login/
+│   │   └── (dashboard)/
+│   │       ├── page.tsx   # Dashboard com métricas
+│   │       ├── imoveis/
+│   │       ├── comodidades/
+│   │       ├── leads/
+│   │       ├── banners/
+│   │       ├── faqs/
+│   │       └── configuracoes/
+│   └── actions/           # Server Actions (backend)
+├── components/
+│   ├── Navbar.tsx
+│   ├── Footer.tsx
+│   ├── PropertyCard.tsx
+│   ├── PromoBanners.tsx
+│   ├── FAQAccordion.tsx
+│   ├── ContactForm.tsx
+│   └── admin/             # Componentes do painel
+├── context/
+│   └── LanguageContext.tsx # Context de idioma global
+├── lib/
+│   ├── db.ts              # Cliente Prisma singleton
+│   ├── session.ts         # Gerenciamento de sessão
+│   └── i18n.ts            # Dicionário de traduções
+prisma/
+├── schema.prisma          # Modelos do banco
+├── seed.js                # Dados iniciais
+└── dev.db                 # Banco SQLite local
+```
+
+---
+
+## 🚀 Como Executar
+
+```bash
+# Instalar dependências
+npm install
+
+# Rodar em desenvolvimento
+npm run dev        # http://localhost:3000
+
+# Build de produção
+npm run build
+npm start
+
+# Resetar e popular o banco com dados de exemplo
+node prisma/seed.js
+```
+
+### Credenciais Padrão do Admin
+> Configuradas no `prisma/seed.js`
+
+| Campo | Valor |
+|-------|-------|
+| Usuário | `admin` |
+| Senha | `admin123` |
+
+> [!CAUTION]
+> Altere a senha do administrador antes de publicar em produção.
+
+---
+
+## 🔗 Integrações de Reserva Suportadas
+
+O site **não processa reservas diretamente**. Cada imóvel possui um link externo configurável:
+
+| Plataforma | Suporte |
+|------------|---------|
+| Airbnb | ✅ Link direto para o anúncio |
+| Booking.com | ✅ Link direto para o anúncio |
+| WhatsApp | ✅ Link `wa.me` com mensagem pré-formatada |
+| Site Próprio | ✅ Qualquer URL externa |
+| Vrbo / HomeAway | ✅ Link direto |
+| Outro | ✅ Qualquer link válido |
+
+---
+
+## 💳 Formas de Pagamento Exibidas no Rodapé
+
+> Exibição informativa — o pagamento ocorre na plataforma parceira de reserva.
+
+- Pix
+- Visa
+- Mastercard
+- American Express (Amex)
+- Apple Pay
+- Google Pay</script>
+
+  <script>
+    // Carregar e renderizar o markdown sem requisições HTTP locais
+    const rawMarkdown = document.getElementById('markdown-text').textContent;
+    document.getElementById('markdown-content').innerHTML = marked.parse(rawMarkdown);
+  </script>
+</body>
+</html>
